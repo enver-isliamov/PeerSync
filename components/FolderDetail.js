@@ -15,6 +15,7 @@ import { CheckCircleIcon } from './icons/CheckCircleIcon.js';
 import { ExclamationCircleIcon } from './icons/ExclamationCircleIcon.js';
 import { PlayIcon } from './icons/PlayIcon.js';
 import { PauseIcon } from './icons/PauseIcon.js';
+import { ChevronLeftIcon } from './icons/ChevronLeftIcon.js';
 
 const formatBytes = (bytes, decimals = 2) => {
   if (bytes === 0) return '0 Bytes';
@@ -272,7 +273,7 @@ const SyncSummary = ({ files }) => {
     );
 };
 
-export const FolderDetail = ({ folder, onConnectPeer, onReGrantPermission, onDelete, onRename, onTogglePause }) => {
+export const FolderDetail = ({ folder, onConnectPeer, onReGrantPermission, onDelete, onRename, onTogglePause, onBack }) => {
   const [activeTab, setActiveTab] = useState('files');
   const [viewMode, setViewMode] = useState('list');
   const [isEditingName, setIsEditingName] = useState(false);
@@ -282,7 +283,11 @@ export const FolderDetail = ({ folder, onConnectPeer, onReGrantPermission, onDel
     // Reset editing state when folder changes
     setIsEditingName(false);
     setCurrentName(folder.name);
-  }, [folder]);
+    // If there are no peers, switch to files tab automatically for better UX
+    if (folder.peers.length === 0 && activeTab === 'peers') {
+        setActiveTab('files');
+    }
+  }, [folder, activeTab]);
 
   const handleNameSave = () => {
     if (currentName.trim() && currentName.trim() !== folder.name) {
@@ -308,8 +313,18 @@ export const FolderDetail = ({ folder, onConnectPeer, onReGrantPermission, onDel
   const totalSize = useMemo(() => folder.files.reduce((sum, file) => sum + file.size, 0), [folder.files]);
 
   return (
-    React.createElement('div', { className: "p-6 h-full flex flex-col" },
-        React.createElement('div', { className: "flex items-start gap-4" },
+    React.createElement('div', { className: "p-4 md:p-6 h-full flex flex-col" },
+        // Mobile Header
+        React.createElement('div', { className: "md:hidden flex items-center mb-4" },
+            React.createElement('button', { onClick: onBack, className: "p-2 -ml-2 mr-2 text-slate-400 hover:text-white" },
+                React.createElement(ChevronLeftIcon, { className: "w-6 h-6" })
+            ),
+            React.createElement('div', { className: "min-w-0" },
+              React.createElement('h2', { className: "text-xl font-bold text-white truncate" }, folder.name)
+            )
+        ),
+        // Desktop Header
+        React.createElement('div', { className: "hidden md:flex items-start gap-4" },
             React.createElement('div', { className: "w-16 h-16 flex-shrink-0 bg-slate-800 rounded-lg flex items-center justify-center" },
                 React.createElement(FolderIcon, { className: "w-10 h-10 text-sky-500" })
             ),
@@ -386,7 +401,7 @@ export const FolderDetail = ({ folder, onConnectPeer, onReGrantPermission, onDel
                     )
                 ),
                 
-                React.createElement('div', { className: "flex-grow overflow-y-auto mt-4 -mr-6 pr-4" },
+                React.createElement('div', { className: "flex-grow overflow-y-auto mt-4" },
                     activeTab === 'files' && (
                          sortedDateKeys.length === 0 ? (
                             React.createElement('div', { className: "text-center p-10 text-slate-500" }, React.createElement(FileIcon, { className: "w-12 h-12 mx-auto" }), React.createElement('p', { className: "mt-4" }, "В этой папке нет файлов."))
