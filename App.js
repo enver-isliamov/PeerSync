@@ -538,7 +538,7 @@ const App = () => {
 
   return (
     React.createElement(React.Fragment, null,
-      React.createElement('div', { className: "h-screen w-screen flex flex-col md:flex-row bg-slate-900 font-sans" },
+      React.createElement('div', { className: "h-dvh w-screen flex flex-col md:flex-row bg-slate-900 font-sans" },
         React.createElement('aside', { className: "hidden md:flex w-96 bg-slate-800/50 flex-col border-r border-slate-700/50" },
           React.createElement('div', { className: "p-4 border-b border-slate-700/50" },
             React.createElement('h1', { className: "text-2xl font-bold text-white" }, "Peer", React.createElement('span', { className: "text-sky-400" }, "Sync")),
