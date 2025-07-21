@@ -6,7 +6,7 @@ import { ExclamationCircleIcon } from './icons/ExclamationCircleIcon.js';
 
 export const Instructions = () => {
     return (
-        React.createElement('div', { className: "p-6 md:p-10 max-w-4xl mx-auto text-slate-300" },
+        React.createElement('div', { className: "p-6 md:p-10 max-w-4xl mx-auto text-slate-300 pb-20 md:pb-10" },
             React.createElement('h1', { className: "text-3xl md:text-4xl font-bold text-white mb-4" }, "Добро пожаловать в PeerSync!"),
             React.createElement('p', { className: "text-lg text-slate-400 mb-10" }, "Это руководство поможет вам начать работу с P2P-синхронизацией файлов."),
 
