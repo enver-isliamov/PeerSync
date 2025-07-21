@@ -62,7 +62,7 @@ export const FolderList = ({ folders, onSelectFolder, onShowInstructions }) => {
   }
 
   return (
-    React.createElement('div', { className: "p-4 space-y-3" },
+    React.createElement('div', { className: "p-4 space-y-3 pb-20 md:pb-4" },
       folders.map(folder => {
         const totalSize = folder.files.reduce((sum, file) => sum + file.size, 0);
         return (
