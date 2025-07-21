@@ -96,7 +96,7 @@ export const QrScanner = ({ onScan, onClose }) => {
         stream.getTracks().forEach(track => track.stop());
       }
     };
-  }, [onScan, loading]);
+  }, [onScan]);
 
   return (
     React.createElement('div', { className: "relative w-full aspect-square bg-slate-900 rounded-md overflow-hidden flex items-center justify-center" },
