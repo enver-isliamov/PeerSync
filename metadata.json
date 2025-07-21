@@ -1,0 +1,8 @@
+{
+  "name": "PeerSync - P2P File Synchronization",
+  "description": "A web application for personal file synchronization and sharing based on P2P principles, inspired by Resilio Sync.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}
