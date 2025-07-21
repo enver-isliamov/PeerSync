@@ -1,4 +1,4 @@
-const CACHE_NAME = 'peersync-assets-v4'; // Bumped version for update
+const CACHE_NAME = 'peersync-assets-v5'; // Bumped version for update
 const urlsToCache = [
   './',
   './index.html',
@@ -26,7 +26,6 @@ const urlsToCache = [
   './components/Instructions.js',
   './components/JoinSyncModal.js',
   './components/QrScanner.js',
-  './components/ShareModal.js',
 
   // Icons
   './components/icons/CheckCircleIcon.js',
@@ -34,7 +33,7 @@ const urlsToCache = [
   './components/icons/CloudArrowDownIcon.js',
   './components/icons/CloudArrowUpIcon.js',
   './components/icons/CopyIcon.js',
-  './components/icons/DevicePhoneMobileIcon.js', // Added this icon
+  './components/icons/DevicePhoneMobileIcon.js',
   './components/icons/DotsVerticalIcon.js',
   './components/icons/ExclamationCircleIcon.js',
   './components/icons/FileIcon.js',
