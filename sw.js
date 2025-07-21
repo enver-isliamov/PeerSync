@@ -1,4 +1,4 @@
-const CACHE_NAME = 'peersync-assets-v5'; // Bumped version for update
+const CACHE_NAME = 'peersync-assets-v6'; // Bumped version for update
 const urlsToCache = [
   './',
   './index.html',
