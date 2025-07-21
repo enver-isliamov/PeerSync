@@ -1,8 +1,8 @@
 // A very simple service worker for caching the app shell
 const CACHE_NAME = 'peersync-shell-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
+  './',
+  './index.html',
   'https://cdn.tailwindcss.com',
   // Note: In a real build process, you'd cache the specific JS/CSS bundles
 ];
