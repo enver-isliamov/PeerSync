@@ -284,13 +284,6 @@ export const FolderDetail = ({ folder, onConnectPeer, onReGrantPermission, onDel
     setCurrentName(folder.name);
   }, [folder]);
 
-  useEffect(() => {
-      // When folder changes, if it has no peers, switch to files tab
-      if (folder.peers.length === 0 && activeTab === 'peers') {
-          setActiveTab('files');
-      }
-  }, [folder, activeTab]);
-  
   const handleNameSave = () => {
     if (currentName.trim() && currentName.trim() !== folder.name) {
       onRename(folder.id, currentName.trim());
