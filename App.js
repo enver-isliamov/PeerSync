@@ -13,6 +13,7 @@ import { getFolders, saveFolders } from './services/db.js';
 import { DeleteFolderModal } from './components/DeleteFolderModal.js';
 import { Instructions } from './components/Instructions.js';
 import { QuestionMarkCircleIcon } from './components/icons/QuestionMarkCircleIcon.js';
+import { BottomNav } from './components/BottomNav.js';
 
 
 async function getFilesFromHandle(dirHandle) {
@@ -537,8 +538,8 @@ const App = () => {
 
   return (
     React.createElement(React.Fragment, null,
-      React.createElement('div', { className: "h-screen w-screen flex bg-slate-900 font-sans" },
-        React.createElement('aside', { className: "w-96 bg-slate-800/50 flex flex-col border-r border-slate-700/50" },
+      React.createElement('div', { className: "h-screen w-screen flex flex-col md:flex-row bg-slate-900 font-sans" },
+        React.createElement('aside', { className: "hidden md:flex w-96 bg-slate-800/50 flex-col border-r border-slate-700/50" },
           React.createElement('div', { className: "p-4 border-b border-slate-700/50" },
             React.createElement('h1', { className: "text-2xl font-bold text-white" }, "Peer", React.createElement('span', { className: "text-sky-400" }, "Sync")),
             React.createElement('p', { className: "text-sm text-slate-400" }, "Real P2P File Sync")
@@ -588,12 +589,13 @@ const App = () => {
             )
           )
         ),
-        React.createElement('main', { className: "flex-1 bg-slate-900 overflow-y-auto" },
+        React.createElement('main', { className: "flex-1 bg-slate-900 overflow-y-auto pb-16 md:pb-0" },
           isInstructionsVisible ? (
             React.createElement(Instructions, null)
           ) : selectedFolder ? (
             React.createElement(FolderDetail, {
               folder: selectedFolder,
+              onBack: handleSelectFoldersView,
               onReGrantPermission: handleReGrantPermission,
               onConnectPeer: handleStartConnectPeer,
               onDelete: (id) => setFolderToDelete(folders.find(f => f.id === id) || null),
@@ -604,11 +606,18 @@ const App = () => {
             React.createElement(FolderList, {
               folders: folders,
               onSelectFolder: setSelectedFolderId,
-              onShowInstructions: () => setIsInstructionsVisible(true)
+              onShowInstructions: handleSelectInstructionsView
             })
           )
         )
       ),
+      React.createElement(BottomNav, {
+        onAdd: () => setIsAddModalOpen(true),
+        onJoin: () => setIsJoinSyncModalOpen(true),
+        onHelp: handleSelectInstructionsView,
+        onShowFolders: handleSelectFoldersView,
+        activeView: isInstructionsVisible ? 'help' : (selectedFolderId ? 'detail' : 'folders')
+      }),
       isAddModalOpen && React.createElement(AddFolderModal, { onClose: () => setIsAddModalOpen(false), onAddFolder: handleAddFolder }),
       isConnectPeerModalOpen && (
         React.createElement(ConnectPeerModal, {
